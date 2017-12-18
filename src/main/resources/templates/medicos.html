@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Medicos</title>
+    </head>
+    <body>
+        <h2>Lista de Medicos</h2>
+        <dl th:each="medico : ${medicos}">
+            <dt class="">
+                <span th:text="${medico.nome}"></span> 
+                <span th:text="${medico.cpf}"></span> 
+                <span th:text="${medico.nascimento}"></span> 
+            </dt>
+        </dl>
+        <hr />
+        <h3>Adicione um novo Médico:</h3>
+        <form method="POST">
+            <label for="nome">Nome:</label> <input type="text" name="nome" size="200"></input><br />
+            <label for="cpf">CPF:</label> <input type="text" name="cpf" size="50"></input><br />
+            <label for="nascimento">Data de Nascimento:</label> <input type="text" name="nascimento" size="50"></input><br />
+            <br /> 
+            <input type="submit" value="Adicionar"></input>
+        </form>
+    </body>
+</html>
