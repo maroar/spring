@@ -1,0 +1,20 @@
+<html>
+    <head>
+    <title>Medicamentos</title>
+    </head>
+    <body>
+        <h2>Lista de Medicamentos</h2>
+        <dl th:each="medicamento : ${medicamentos}">
+            <dt class="">
+                <span th:text="${medicamento.nome}">Title</span> 
+            </dt>
+        </dl>
+        <hr />
+        <h3>Adicione um novo medicamento:</h3>
+        <form method="POST">
+            <label for="nome">Nome:</label> <input type="text" name="nome" size="50"></input><br />
+            <br /> 
+            <input type="submit" value="Adicionar"></input>
+        </form>
+    </body>
+</html>
