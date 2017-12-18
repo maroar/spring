@@ -8,7 +8,6 @@ import javax.persistence.Id;
 
 @Entity
 public class Medicamento {
-
     @Id 
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
