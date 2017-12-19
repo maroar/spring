@@ -11,4 +11,6 @@ public interface RepositorioMedicamento extends JpaRepository<Medicamento, Long>
     
     Medicamento findById(Long id);
 
+    List<Medicamento> findAll();
+
 }
