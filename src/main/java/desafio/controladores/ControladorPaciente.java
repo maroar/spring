@@ -29,13 +29,13 @@ public class ControladorPaciente {
 
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Paciente pacientes(@PathVariable("id") Long id) {
+    public Paciente getJSONPaciente(@PathVariable("id") Long id) {
         Paciente paciente = repositorioPaciente.findById(id);
         return paciente;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String pacientes(Model model) {
+    public String getAllPacientes(Model model) {
         List<Paciente> listaDePacientes = repositorioPaciente.findAll();
         if (listaDePacientes != null) {
             model.addAttribute("pacientes", listaDePacientes);
@@ -44,7 +44,7 @@ public class ControladorPaciente {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String pacientes(
+    public String addPaciente(
         @RequestParam(value="nome", defaultValue="NoName") String nome,
         @RequestParam(value="cpf", defaultValue="NoCPF") String cpf,
         @RequestParam(value="nascimento", defaultValue="NoNascimento") String nascimento,

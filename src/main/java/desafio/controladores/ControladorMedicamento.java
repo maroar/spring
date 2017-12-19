@@ -29,13 +29,13 @@ public class ControladorMedicamento {
 
     @ResponseBody
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Medicamento medicamentos(@PathVariable("id") Long id) {
+    public Medicamento getJSONMedicamento(@PathVariable("id") Long id) {
         Medicamento medicamento = repositorioMedicamento.findById(id);
         return medicamento;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String medicamentos(Model model) {
+    public String getAllMedicamentos(Model model) {
         List<Medicamento> listaDeMedicamentos = repositorioMedicamento.findAll();
         if (listaDeMedicamentos != null) {
             model.addAttribute("medicamentos", listaDeMedicamentos);
@@ -44,7 +44,7 @@ public class ControladorMedicamento {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String medicamentos(@RequestParam(value="nome", defaultValue="NoName") String nome, Medicamento medicamento) {
+    public String addMedicamento(@RequestParam(value="nome", defaultValue="NoName") String nome, Medicamento medicamento) {
         medicamento.setNome(nome);
         repositorioMedicamento.save(medicamento);
         return "redirect:/medicamentos";
