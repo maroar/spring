@@ -1,21 +1,72 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Medicamentos</title>
+        <title>Spring</title>
+        <style>
+            table {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+            }
+
+            td, th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+            }
+        </style>
     </head>
     <body>
-        <h2>Lista de Medicamentos</h2>
-        <dl th:each="medicamento : ${medicamentos}">
-            <dt class="">
-                <span th:text="${medicamento.nome}">Title</span> 
-            </dt>
-        </dl>
+        <table>
+            <tr>
+                <th>
+                    <a href="/pacientes">Pacientes</a>
+                </th>
+                <th>
+                    <a href="/medicos">Medicos</a>
+                </th>
+                <th bgcolor="#dddddd">
+                    <a href="/medicamentos">Medicamentos</a>
+                </th>
+                <th>
+                    <a href="/prescricoes">Prescrições</a>
+                </th>
+            </tr>
+        </table>
+
+        <table>
+            <dl th:each="medicamento : ${medicamentos}">
+                <tr>
+                    <dt class="">
+                        <td><span th:text="${medicamento.nome}">Title</span></td> 
+                    </dt>
+                </tr>
+            </dl>
+        </table>
+
         <hr />
-        <h3>Adicione um novo medicamento:</h3>
+        
         <form method="POST">
-            <label for="nome">Nome:</label> <input type="text" name="nome" size="50"></input><br />
-            <br /> 
-            <input type="submit" value="Adicionar"></input>
+            <table>
+                <tr>
+                    <th colspan="2" bgcolor="#dddddd">
+                        Adicione um novo medicamento:
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Nome:
+                    </td>
+                    <td>
+                        <input type="text" name="nome" size="50"></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Adicionar"></input>
+                    </td>
+                </tr>
+            </table>
         </form>
     </body>
 </html>

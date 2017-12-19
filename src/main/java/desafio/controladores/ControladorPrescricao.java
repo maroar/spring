@@ -82,9 +82,12 @@ public class ControladorPrescricao {
     public String addPrescricao(
         @RequestParam(value="medico_id", defaultValue="0") long medico_id,
         @RequestParam(value="paciente_id", defaultValue="0") long paciente_id,
-        @RequestParam(value="medicamentos") String medicamentos_id, 
+        @RequestParam(value="medicamentos", defaultValue="NoMedicamentos") String medicamentos_id, 
         @RequestParam(value="data", defaultValue="NoData") String data,
         Prescricao prescricao) {
+
+        if (medico_id == 0 || paciente_id == 0 || data == "NoData" || medicamentos_id == "NoMedicamentos")
+            return "redirect:/prescricoes";
 
         Medico medico = repositorioMedico.findById(medico_id);
         Paciente paciente = repositorioPaciente.findById(paciente_id);
@@ -93,10 +96,10 @@ public class ControladorPrescricao {
         String[] parts = {};
         if (data != "NoData") {
             parts = medicamentos_id.split(",");
-        }
-        for (int i = 0; i < parts.length; i++){
-            Medicamento medicamento = repositorioMedicamento.findById(Long.parseLong(parts[i]));
-            medicamentos.add(medicamento);
+            for (int i = 0; i < parts.length; i++){
+                Medicamento medicamento = repositorioMedicamento.findById(Long.parseLong(parts[i]));
+                medicamentos.add(medicamento);
+            }
         }
 
         prescricao.setMedico(medico);

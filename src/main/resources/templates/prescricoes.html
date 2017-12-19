@@ -1,36 +1,122 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Prescricoes</title>
+        <title>Spring</title>
+        <style>
+            table {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+            }
+
+            td, th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+            }
+        </style>
     </head>
     <body>
-        <h2>Lista de Prescrições</h2>
-        <dl th:each="prescricao : ${prescricoes}">
-            <dt class="">
-                Medico:<span th:text="${prescricao.medico.nome}"></span><br></br>
-                Paciente:<span th:text="${prescricao.paciente.nome}"></span><br></br>
-                Data:<span th:text="${prescricao.data}"></span><br></br>
-                <dl th:each="medicamento : ${prescricao.medicamentos}">
-                    Medicamento:<span th:text="${medicamento.nome}"></span><br></br>
-                </dl>
-            </dt>
-            <hr />
-        </dl>
+        <table>
+            <tr>
+                <th>
+                    <a href="/pacientes">Pacientes</a>
+                </th>
+                <th>
+                    <a href="/medicos">Medicos</a>
+                </th>
+                <th>
+                    <a href="/medicamentos">Medicamentos</a>
+                </th>
+                <th bgcolor="#dddddd">
+                    <a href="/prescricoes">Prescrições</a>
+                </th>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th>
+                    <a href="/pacientes">Médico</a>
+                </th>
+                <th>
+                    <a href="/medicos">Paciente</a>
+                </th>
+                <th>
+                    <a href="/medicamentos">Data</a>
+                </th>
+                <th>
+                    <a href="/prescricoes">Medicamentos</a>
+                </th>
+            </tr>
+            <dl th:each="prescricao : ${prescricoes}">
+                <tr>
+                    <dt class="">
+                        <td><span th:text="${prescricao.medico.nome}"></span></td>
+                        <td><span th:text="${prescricao.paciente.nome}"></span></td>
+                        <td><span th:text="${prescricao.data}"></span></td>
+                        <td>
+                            <ul>
+                                <dl th:each="medicamento : ${prescricao.medicamentos}">
+                                    <ui><span th:text="${medicamento.nome}"></span></ui>
+                                </dl>
+                            </ul>
+                        </td>
+                    </dt>
+                </tr>
+            </dl>    
+        </table>
+
         <hr />
-        <h3>Adicionar uma nova Prescricao:</h3>
+
         <form method="POST">
-            <select name="medico_id">
-                <option value="0">Selcione o Médico</option>
-                <option th:each="medico : ${medicos}" th:value="${medico.id}" th:text="${medico.nome}"></option>
-            </select>
-            <select  name="paciente_id">
-                <option value="0">Selcione o Paciente</option>
-                <option th:each="paciente : ${pacientes}" th:value="${paciente.id}" th:text="${paciente.nome}"></option>
-            </select>
-            <input name="medicamentos" type="checkbox" th:each="medicamento : ${medicamentos}" th:value="${medicamento.id}" th:text="${medicamento.nome}"></input>
-            <input type="text" name="data" size="50"></input>
-            <input type="submit" value="Adicionar"></input>
-            <hr />
+            <table>
+                <tr>
+                    <th colspan="2" bgcolor="#dddddd">
+                        Adicionar uma nova Prescricao:
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Médico:
+                    </td>
+                    <td>
+                        <select name="medico_id">
+                            <option value="0">Selcione o Médico</option>
+                            <option th:each="medico : ${medicos}" th:value="${medico.id}" th:text="${medico.nome}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Paciente:
+                    </td>
+                    <td>
+                        <select  name="paciente_id">
+                            <option value="0">Selcione o Paciente</option>
+                            <option th:each="paciente : ${pacientes}" th:value="${paciente.id}" th:text="${paciente.nome}"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Data:
+                    </td>
+                    <td>
+                        <input type="text" name="data" size="50"></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input name="medicamentos" type="checkbox" th:each="medicamento : ${medicamentos}" th:value="${medicamento.id}" th:text="${medicamento.nome}"></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Adicionar"></input>
+                    </td>
+                </tr>
+            </table>
         </form>
     </body>
 </html>

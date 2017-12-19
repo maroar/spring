@@ -1,25 +1,90 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>Pacientes</title>
+        <title>Spring</title>
+        <style>
+            table {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+            }
+
+            td, th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+            }
+        </style>
     </head>
     <body>
-        <h2>Lista de Pacientes</h2>
-        <dl th:each="paciente : ${pacientes}">
-            <dt class="">
-                <span th:text="${paciente.nome}"></span> 
-                <span th:text="${paciente.cpf}"></span> 
-                <span th:text="${paciente.nascimento}"></span> 
-            </dt>
-        </dl>
+        <table>
+            <tr>
+                <th bgcolor="#dddddd">
+                    <a href="/pacientes">Pacientes</a>
+                </th>
+                <th>
+                    <a href="/medicos">Medicos</a>
+                </th>
+                <th>
+                    <a href="/medicamentos">Medicamentos</a>
+                </th>
+                <th>
+                    <a href="/prescricoes">Prescrições</a>
+                </th>
+            </tr>
+        </table>
+        
+        <table>
+            <dl th:each="paciente : ${pacientes}">
+                <tr>
+                    <dt class="st1">
+                        <td><span th:text="${paciente.nome}"></span></td> 
+                        <td><span th:text="${paciente.cpf}"></span></td>
+                        <td><span th:text="${paciente.nascimento}"></span></td> 
+                    </dt>
+                </tr>
+            </dl>    
+        </table>
+        
         <hr />
-        <h3>Adicione um novo paciente:</h3>
+
         <form method="POST">
-            <label for="nome">Nome:</label> <input type="text" name="nome" size="200"></input><br />
-            <label for="cpf">CPF:</label> <input type="text" name="cpf" size="50"></input><br />
-            <label for="nascimento">Data de Nascimento:</label> <input type="text" name="nascimento" size="50"></input><br />
-            <br /> 
-            <input type="submit" value="Adicionar"></input>
+            <table>
+                <tr>
+                    <th colspan="2" bgcolor="#dddddd">
+                        Adicione um novo paciente:
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Nome:
+                    </td>
+                    <td>
+                        <input type="text" name="nome" size="50"></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        CPF:
+                    </td>
+                    <td>
+                        <input type="text" name="cpf" size="50"></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Data de Nascimento:
+                    </td>
+                    <td>
+                        <input type="text" name="nascimento" size="50"></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Adicionar"></input>
+                    </td>
+                </tr>
+            </table>
         </form>
     </body>
 </html>
