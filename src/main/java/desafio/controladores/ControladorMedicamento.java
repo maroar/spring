@@ -17,7 +17,7 @@ import entidades.Medicamento;
 import repositorios.RepositorioMedicamento;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/medicamentos")
 public class ControladorMedicamento {
 
     private RepositorioMedicamento repositorioMedicamento;
@@ -28,13 +28,13 @@ public class ControladorMedicamento {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/medicamentos/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Medicamento medicamentos(@PathVariable("id") Long id) {
         Medicamento medicamento = repositorioMedicamento.findById(id);
         return medicamento;
     }
 
-    @RequestMapping(value = "/medicamentos", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String medicamentos(Model model) {
         List<Medicamento> listaDeMedicamentos = repositorioMedicamento.findAll();
         if (listaDeMedicamentos != null) {
@@ -43,11 +43,12 @@ public class ControladorMedicamento {
         return "medicamentos";
     }
 
-    @RequestMapping(value = "/medicamentos", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public String medicamentos(@RequestParam(value="nome", defaultValue="NoName") String nome, Medicamento medicamento) {
         medicamento.setNome(nome);
         repositorioMedicamento.save(medicamento);
         return "redirect:/medicamentos";
     }
+    
 }
 

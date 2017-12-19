@@ -1,19 +1,23 @@
 package entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.Set;
+import javax.persistence.*;
 
 @Entity
+@Table(name = Medicamento.tableName)
 public class Medicamento {
-    @Id 
-    @GeneratedValue(strategy=GenerationType.AUTO)
+
+    public static final String tableName = "medicamentos";
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private long id;
     
-    @Column(name="nome", nullable=false)
     private String nome;
+
+    public Medicamento() {
+    }
 
     public long getId() {
         return id;
@@ -26,5 +30,6 @@ public class Medicamento {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
 }
 

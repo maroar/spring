@@ -8,7 +8,7 @@ import entidades.Medicamento;
 public interface RepositorioMedicamento extends JpaRepository<Medicamento, Long> {
 
     Medicamento findByNome(String nome);
-
+    
     Medicamento findById(Long id);
 
 }
