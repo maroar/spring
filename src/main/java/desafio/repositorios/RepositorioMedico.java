@@ -10,5 +10,5 @@ public interface RepositorioMedico extends JpaRepository<Medico, Long> {
     Medico findByNome(String nome);
 
     Medico findById(Long id);
-
+    
 }

@@ -17,7 +17,7 @@ import entidades.Medico;
 import repositorios.RepositorioMedico;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/medicos")
 public class ControladorMedico {
 
     private RepositorioMedico repositorioMedico;
@@ -28,13 +28,13 @@ public class ControladorMedico {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/medicos/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Medico medicos(@PathVariable("id") Long id) {
         Medico medico = repositorioMedico.findById(id);
         return medico;
     }
 
-    @RequestMapping(value = "/medicos", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String medicos(Model model) {
         List<Medico> listaDeMedicos = repositorioMedico.findAll();
         if (listaDeMedicos != null) {
@@ -43,15 +43,17 @@ public class ControladorMedico {
         return "medicos";
     }
 
-    @RequestMapping(value = "/medicos", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public String medicos(
         @RequestParam(value="nome", defaultValue="NoName") String nome,
         @RequestParam(value="cpf", defaultValue="NoCPF") String cpf,
         @RequestParam(value="nascimento", defaultValue="NoNascimento") String nascimento,
+        @RequestParam(value="cro", defaultValue="NoCRO") String cro,
         Medico medico) {
         medico.setNome(nome);
         medico.setCpf(cpf);
         medico.setNascimento(nascimento);
+        medico.setCro(cro);
         repositorioMedico.save(medico);
         return "redirect:/medicos";
     }
