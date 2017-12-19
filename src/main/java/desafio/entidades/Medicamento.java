@@ -1,6 +1,7 @@
 package entidades;
 
-import java.util.Set;
+import java.util.Set; 
+import java.util.HashSet;
 import javax.persistence.*;
 
 @Entity
@@ -11,10 +12,16 @@ public class Medicamento {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "medicamento_id")
     private long id;
     
     private String nome;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "prescricoes_medicamentos",
+        joinColumns = @JoinColumn(name = "medicamento_id", referencedColumnName = "medicamento_id"),
+        inverseJoinColumns = @JoinColumn(name = "prescricao_id", referencedColumnName = "prescricao_id"))
+    private Set<Prescricao> prescricoes = new HashSet<Prescricao>();
 
     public Medicamento() {
     }

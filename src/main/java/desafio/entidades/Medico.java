@@ -1,5 +1,7 @@
 package entidades;
 
+import java.util.Set;
+import java.util.HashSet;
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +12,7 @@ public class Medico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id") 
+    @Column(name = "medico_id") 
     private long id;
     
     private String nome;
@@ -20,6 +22,9 @@ public class Medico {
     private String nascimento;
 
     private String cro;
+
+    @OneToMany(mappedBy = "medico")
+    private Set<Prescricao> skills = new HashSet<Prescricao>();
 
     public Medico() {
     }
